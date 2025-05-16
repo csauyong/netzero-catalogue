@@ -1,4 +1,6 @@
-title: “Research Data & Models”
+# Good
+title: "Research Data & Models"
+theme: jekyll-theme-cayman
 markdown: kramdown
-theme: minima        # or another official theme
-plugins: jekyll-feed  # optional
+plugins:
+  - jekyll-feed
