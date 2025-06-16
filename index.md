@@ -3,19 +3,20 @@ layout: default
 title: Research Data & Models
 ---
 
-# 🗂 Research Data & Models
+# 🗂 Energy Use, Retrofit & Net Zero Catalogue
 
-Welcome to our lab’s catalogue of datasets and computational models.  
-Use the search box below or click a column header to sort.
+Welcome to the Energy Use, Retrofit & Net Zero Research Theme’s catalogue of datasets and computational models.  
+We are part of the Institute for Environmental Design and Engineering in the Bartlett School of Environment, Energy and Resources at UCL.  
+Our research investigates the energy consumption and carbon intensity of individual buildings and entire building stocks to inform retrofit strategies and accelerate the journey to net zero.
+
+Use the search box below or click a column header to sort through our curated resources.
 
 ---
 
-<!-- 1) Expose your YAML data as a JS variable -->
 <script>
   const RESOURCES = {{ site.data.resources | jsonify }};
 </script>
 
-<!-- 2) (Optional) Add simple filter buttons for “Data” / “Model” / “All” -->
 <p>
   <button id="filter-all">All</button>
   <button id="filter-data">Data</button>
@@ -32,13 +33,13 @@ Use the search box below or click a column header to sort.
       <th>Title</th>
       <th>Type</th>
       <th>Description</th>
-      <th>Link</th>
+      <th>Access</th>
       <th>License</th>
       <th>Contact</th>
     </tr>
   </thead>
   <tbody>
-    <!-- JavaScript will fill this in -->
+    <!-- JavaScript will populate rows here -->
   </tbody>
 </table>
 
@@ -47,10 +48,8 @@ Use the search box below or click a column header to sort.
 ## ℹ️ Contribute & Support
 
 If you’d like to **add** a resource, please fill out our  
-[short submission form](https://forms.gle/…) or open an issue on this repo.  
-For **questions** or **access requests**, email [support@lab.org].
-
-<!-- 3) Include DataTables JS/CSS and a small script to build+filter the table -->
+[short submission form](https://forms.office.com/e/3qTjfDh5wp) or open an issue on this repo.  
+For **questions** or **access requests**, email [ucbvauy@ucl.ac.uk].
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -58,22 +57,31 @@ For **questions** or **access requests**, email [support@lab.org].
 
 <script>
 $(document).ready(function() {
-  // Populate <tbody> from RESOURCES
   let $tbody = $('#resource-table tbody');
+
   RESOURCES.forEach(r => {
+    // Determine whether to show Download or Contact link
+    let accessCell;
+    if (r.link.startsWith('mailto:')) {
+      accessCell = `<a href="${r.link}">Contact</a>`;
+    } else {
+      accessCell = `<a href="${r.link}">Download</a>`;
+    }
+
+    // Fallback for empty contact field
     let contactCell = r.contact ? r.contact : '—';
+
     let row = `<tr>
-      <td><a href="${r.link}">${r.title}</a></td>
+      <td>${r.title}</td>
       <td>${r.type}</td>
       <td>${r.description}</td>
-      <td><a href="${r.link}">Download</a></td>
+      <td>${accessCell}</td>
       <td>${r.license}</td>
       <td>${contactCell}</td>
     </tr>`;
     $tbody.append(row);
   });
 
-  // Initialize DataTables
   let table = $('#resource-table').DataTable({
     paging:   false,
     info:     false,
@@ -81,15 +89,8 @@ $(document).ready(function() {
     order:    []
   });
 
-  // Button handlers for “All / Data / Model”
-  $('#filter-all').on('click', function() {
-    table.column(1).search('').draw();
-  });
-  $('#filter-data').on('click', function() {
-    table.column(1).search('data', false, true).draw();
-  });
-  $('#filter-model').on('click', function() {
-    table.column(1).search('model', false, true).draw();
-  });
+  $('#filter-all').on('click',  () => table.column(1).search('').draw());
+  $('#filter-data').on('click', () => table.column(1).search('data', false, true).draw());
+  $('#filter-model').on('click',() => table.column(1).search('model', false, true).draw());
 });
 </script>

@@ -25,9 +25,10 @@
 - title: "Carbon Emissions Reduction Scenarios"
   type: "data"
   description: "Synthetic emissions data under three retrofit penetration pathways (2020–2050)."
-  link: "https://figshare.com/articles/dataset/EmissionsScenarios/9876543"
+  # Restricted access: download via email
+  link: "mailto:policy-lab@lab.org"
   license: "CC0"
-  contact: ""
+  contact: "policy-lab@lab.org"
   tags:
     - emissions
     - scenario
@@ -36,7 +37,8 @@
 - title: "Net-Zero Energy Building Design Generator"
   type: "both"
   description: "Code and example datasets for automated NZEB floorplan and envelope design."
-  link: "/request-access.html"
+  # Restricted access: download via email
+  link: "mailto:design-lab@university.edu"
   license: "Proprietary"
   contact: "design-lab@university.edu"
   tags:
