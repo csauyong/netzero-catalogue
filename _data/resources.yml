@@ -1,0 +1,67 @@
+# _data/resources.yml
+
+- title: "Urban Building Retrofit Cost Model"
+  type: "model"
+  description: "A regression model predicting retrofit costs for mid-rise residential buildings."
+  link: "https://github.com/YourOrg/retrofit-cost-model"
+  license: "Apache-2.0"
+  contact: "retrofit-team@lab.org"
+  tags:
+    - retrofit
+    - cost-estimation
+    - residential
+
+- title: "Thermal Performance Simulation Dataset"
+  type: "data"
+  description: "Hourly indoor/outdoor temperature logs from 50 net-zero prototype homes."
+  link: "https://doi.org/10.1234/zenodo.7654321"
+  license: "CC-BY 4.0"
+  contact: ""
+  tags:
+    - net-zero
+    - thermal
+    - simulation
+
+- title: "Carbon Emissions Reduction Scenarios"
+  type: "data"
+  description: "Synthetic emissions data under three retrofit penetration pathways (2020–2050)."
+  link: "https://figshare.com/articles/dataset/EmissionsScenarios/9876543"
+  license: "CC0"
+  contact: ""
+  tags:
+    - emissions
+    - scenario
+    - policy
+
+- title: "Net-Zero Energy Building Design Generator"
+  type: "both"
+  description: "Code and example datasets for automated NZEB floorplan and envelope design."
+  link: "/request-access.html"
+  license: "Proprietary"
+  contact: "design-lab@university.edu"
+  tags:
+    - nzeb
+    - generative-design
+    - envelope
+
+- title: "Retrofit Energy Performance Prediction Model"
+  type: "model"
+  description: "A gradient-boosting model forecasting post-retrofit energy savings."
+  link: "https://github.com/YourOrg/retrofit-energy-model"
+  license: "MIT"
+  contact: "energy-model@lab.org"
+  tags:
+    - retrofit
+    - energy
+    - machine-learning
+
+- title: "Building Materials Embodied Carbon Dataset"
+  type: "data"
+  description: "Embodied carbon factors for 120 common construction materials."
+  link: "https://doi.org/10.1234/zenodo.1122334"
+  license: "CC-BY-NC"
+  contact: ""
+  tags:
+    - materials
+    - carbon
+    - lifecycle
