@@ -5,9 +5,7 @@ title: Research Data & Models
 
 # 🗂 Energy Use, Retrofit & Net Zero Catalogue
 
-Welcome to the Energy Use, Retrofit & Net Zero Research Theme’s catalogue of datasets and computational models.  
-We are part of the Institute for Environmental Design and Engineering in the Bartlett School of Environment, Energy and Resources at UCL.  
-Our research investigates the energy consumption and carbon intensity of individual buildings and entire building stocks to inform retrofit strategies and accelerate the journey to net zero.
+Welcome to the Energy Use, Retrofit & Net Zero Research Theme’s catalogue of datasets and computational models. We are part of the Institute for Environmental Design and Engineering in the Bartlett School of Environment, Energy and Resources at UCL. Our research investigates the energy consumption and carbon intensity of individual buildings and entire building stocks to inform retrofit strategies and accelerate the journey to net zero.
 
 Use the search box below or click a column header to sort through our curated resources.
 
