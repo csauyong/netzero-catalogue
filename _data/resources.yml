@@ -35,7 +35,7 @@
     - policy
 
 - title: "Net-Zero Energy Building Design Generator"
-  type: "both"
+  type: "data, model"
   description: "Code and example datasets for automated NZEB floorplan and envelope design."
   # Restricted access: download via email
   link: "mailto:design-lab@university.edu"
@@ -57,8 +57,8 @@
     - energy
     - machine-learning
 
-- title: "Building Materials Embodied Carbon Dataset"
-  type: "data"
+- title: "Building Materials Embodied Carbon Simulation"
+  type: "simulation"
   description: "Embodied carbon factors for 120 common construction materials."
   link: "https://doi.org/10.1234/zenodo.1122334"
   license: "CC-BY-NC"
