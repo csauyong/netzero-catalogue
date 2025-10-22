@@ -48,9 +48,8 @@ Use the search box below or click a column header to sort through our curated re
 
 ## ℹ️ Contribute & Support
 
-If you’d like to **add** a resource, please fill out our  
-[short submission form](https://forms.office.com/e/3qTjfDh5wp) or open an issue on this repo.  
-For **questions** or **access requests**, email [ucbvauy@ucl.ac.uk].
+If you’d like to **add** a resource, please fill out our [short submission form](https://forms.office.com/e/3qTjfDh5wp) or open an issue on this repo.  
+For **questions** or **access requests**, email [Chun Sang Au Yong](mailto:ucbvauy@ucl.ac.uk).
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
