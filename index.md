@@ -93,6 +93,6 @@ $(document).ready(function() {
   $('#filter-all').on('click',  () => table.column(1).search('').draw());
   $('#filter-data').on('click', () => table.column(1).search('data', false, true).draw());
   $('#filter-model').on('click',() => table.column(1).search('model', false, true).draw());
-  $('#filter-other').on('click',() => table.column(1).search('other', false, true).draw());
+  $('#filter-other').on('click',() => table.column(1).search('^(?!.*(data|model)).*$', true, false).draw());
 });
 </script>
