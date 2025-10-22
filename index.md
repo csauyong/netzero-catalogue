@@ -5,7 +5,9 @@ title: Research Data & Models
 
 # 🗂 Energy Use, Retrofit & Net Zero Catalogue
 
-Welcome to the Energy Use, Retrofit & Net Zero Research Theme’s catalogue of datasets and computational models. We are part of the Institute for Environmental Design and Engineering in the Bartlett School of Environment, Energy and Resources at UCL. Our research investigates the energy consumption and carbon intensity of individual buildings and entire building stocks to inform retrofit strategies and accelerate the journey to net zero.
+Welcome to the **[Energy Use, Retrofit & Net Zero Research Theme](https://www.ucl.ac.uk/bartlett/environment-energy-resources/environmental-design/research-ucl-institute-environmental-design-and-engineering/energy-use-retrofit-and-net-zero)**’s catalogue of datasets and computational models.  
+We are part of the **[UCL Institute for Environmental Design and Engineering (IEDE)](https://www.ucl.ac.uk/bartlett/environment-energy-resources/environmental-design)** within the **Bartlett School of Environment, Energy and Resources (BSEER)** at UCL.  
+Our research investigates the energy consumption and carbon intensity of individual buildings and entire building stocks to inform retrofit strategies and accelerate the journey to net zero.
 
 Use the search box below or click a column header to sort through our curated resources.
 
@@ -19,6 +21,7 @@ Use the search box below or click a column header to sort through our curated re
   <button id="filter-all">All</button>
   <button id="filter-data">Data</button>
   <button id="filter-model">Model</button>
+  <button id="filter-other">Other</button>
 </p>
 
 ---
@@ -90,5 +93,6 @@ $(document).ready(function() {
   $('#filter-all').on('click',  () => table.column(1).search('').draw());
   $('#filter-data').on('click', () => table.column(1).search('data', false, true).draw());
   $('#filter-model').on('click',() => table.column(1).search('model', false, true).draw());
+  $('#filter-other').on('click',() => table.column(1).search('other', false, true).draw());
 });
 </script>
