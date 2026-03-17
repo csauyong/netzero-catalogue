@@ -3,76 +3,272 @@ layout: default
 title: Research Data & Models
 ---
 
-# 🗂 Energy Use, Retrofit & Net Zero Catalogue
+# Energy Use, Retrofit & Net Zero Catalogue
 
-Welcome to the Energy Use, Retrofit & Net Zero Research Theme’s catalogue of datasets and computational models. We are part of the Institute for Environmental Design and Engineering in the Bartlett School of Environment, Energy and Resources at UCL. Our research investigates the energy consumption and carbon intensity of individual buildings and entire building stocks to inform retrofit strategies and accelerate the journey to net zero.
+Welcome to the Energy Use, Retrofit & Net Zero Research Theme's catalogue of datasets and computational models. We are part of the Institute for Environmental Design and Engineering in the Bartlett School of Environment, Energy and Resources at UCL. Our research investigates the energy consumption and carbon intensity of individual buildings and entire building stocks to inform retrofit strategies and accelerate the journey to net zero.
 
-Use the search box below or click a column header to sort through our curated resources.
+<style>
+/* ── Filter bar ─────────────────────────────────────────── */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin: 1.5rem 0 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
----
+.filter-btn {
+  padding: 7px 20px;
+  border: 2px solid #157878;
+  background: transparent;
+  color: #157878;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background 0.15s, color 0.15s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: #157878;
+  color: #fff;
+}
+
+/* ── Resource count ─────────────────────────────────────── */
+#resource-count {
+  font-size: 0.83rem;
+  color: #9ca3af;
+  margin: 0.4rem 0 1rem;
+}
+
+/* ── Type badges ────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+.badge-data  { background: #dbeafe; color: #1d4ed8; }
+.badge-model { background: #dcfce7; color: #15803d; }
+.badge-both  { background: #f3e8ff; color: #7e22ce; }
+
+/* ── Tags ───────────────────────────────────────────────── */
+.tags { margin-top: 7px; }
+
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 2px 2px 2px 0;
+  border-radius: 10px;
+  font-size: 0.71rem;
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  user-select: none;
+}
+
+.tag:hover          { background: #e2e8f0; color: #1e293b; }
+.tag.active         { background: #157878; color: #fff; border-color: #157878; }
+
+/* ── Table ──────────────────────────────────────────────── */
+#resource-table {
+  width: 100% !important;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+#resource-table thead th {
+  background: #f8fafc;
+  color: #6b7280;
+  font-weight: 700;
+  font-size: 0.71rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 11px 12px;
+  border-top: 2px solid #e5e7eb;
+  border-bottom: 2px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+#resource-table tbody tr {
+  transition: background 0.1s;
+}
+
+#resource-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+#resource-table tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+/* Bold title column */
+#resource-table tbody td:first-child {
+  font-weight: 600;
+  color: #111827;
+  min-width: 160px;
+}
+
+/* ── Access buttons ─────────────────────────────────────── */
+.access-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 13px;
+  border-radius: 6px;
+  font-size: 0.81rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: background 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+}
+
+.access-download {
+  background: #157878;
+  color: #fff !important;
+  box-shadow: 0 1px 3px rgba(21,120,120,0.3);
+}
+
+.access-download:hover {
+  background: #0f5f5f;
+  box-shadow: 0 2px 6px rgba(21,120,120,0.4);
+}
+
+.access-contact {
+  background: #f0f9ff;
+  color: #0369a1 !important;
+  border: 1px solid #bae6fd;
+}
+
+.access-contact:hover {
+  background: #e0f2fe;
+}
+
+/* ── Contact cell ───────────────────────────────────────── */
+.contact-link {
+  color: #157878;
+  text-decoration: none;
+  font-size: 0.83rem;
+  word-break: break-all;
+}
+
+.contact-link:hover { text-decoration: underline; }
+
+/* ── DataTables search box ──────────────────────────────── */
+.dataTables_wrapper .dataTables_filter {
+  margin-bottom: 0.5rem;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  min-width: 220px;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+  border-color: #157878;
+  box-shadow: 0 0 0 3px rgba(21,120,120,0.12);
+}
+
+/* ── Contribute box ─────────────────────────────────────── */
+.contribute-box {
+  background: #f0fafa;
+  border: 1px solid #b2dfdf;
+  border-radius: 10px;
+  padding: 1.1rem 1.4rem;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+</style>
 
 <script>
   const RESOURCES = {{ site.data.resources | jsonify }};
 </script>
 
-<p>
-  <button id="filter-all">All</button>
-  <button id="filter-data">Data</button>
-  <button id="filter-model">Model</button>
-</p>
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="data">Data</button>
+  <button class="filter-btn" data-filter="model">Model</button>
+</div>
 
----
-
-## 📋 All Resources
+<p id="resource-count"></p>
 
 <table id="resource-table">
   <thead>
     <tr>
       <th>Title</th>
       <th>Type</th>
-      <th>Description</th>
+      <th>Description &amp; Tags</th>
       <th>Access</th>
       <th>License</th>
       <th>Contact</th>
     </tr>
   </thead>
   <tbody>
-    <!-- JavaScript will populate rows here -->
+    <!-- Populated by JavaScript -->
   </tbody>
 </table>
 
----
-
-## ℹ️ Contribute & Support
-
-If you’d like to **add** a resource, please fill out our  
-[short submission form](https://forms.office.com/e/3qTjfDh5wp) or open an issue on this repo.  
-For **questions** or **access requests**, email [ucbvauy@ucl.ac.uk].
+<div class="contribute-box">
+  <strong>Add a resource</strong> — fill out our <a href="https://forms.office.com/e/3qTjfDh5wp">short submission form</a> or open an issue on this repo.<br>
+  <strong>Questions or access requests</strong> — email <a href="mailto:ucbvauy@ucl.ac.uk">ucbvauy@ucl.ac.uk</a>.
+</div>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
 <script>
-$(document).ready(function() {
-  let $tbody = $('#resource-table tbody');
+$(document).ready(function () {
+  const $tbody = $('#resource-table tbody');
 
   RESOURCES.forEach(r => {
-    // Determine whether to show Download or Contact link
-    let accessCell;
-    if (r.link.startsWith('mailto:')) {
-      accessCell = `<a href="${r.link}">Contact</a>`;
-    } else {
-      accessCell = `<a href="${r.link}">Download</a>`;
-    }
+    // Type badge
+    const badgeClass = 'badge badge-' + (r.type === 'both' ? 'both' : r.type);
+    const typeCell = `<span class="${badgeClass}">${r.type}</span>`;
 
-    // Fallback for empty contact field
-    let contactCell = r.contact ? r.contact : '—';
+    // Access link
+    const accessCell = r.link.startsWith('mailto:')
+      ? `<a href="${r.link}" class="access-link access-contact">✉ Contact</a>`
+      : `<a href="${r.link}" class="access-link access-download" target="_blank" rel="noopener">↓ Download</a>`;
 
-    let row = `<tr>
+    // Contact cell – clickable mailto link
+    const contactCell = r.contact
+      ? `<a href="mailto:${r.contact}" class="contact-link">${r.contact}</a>`
+      : '<span style="color:#d1d5db">—</span>';
+
+    // Tags as clickable chips
+    const tagsHtml = (r.tags || [])
+      .map(tag => `<span class="tag" data-tag="${tag}">${tag}</span>`)
+      .join('');
+    const descCell = r.description + (tagsHtml ? `<div class="tags">${tagsHtml}</div>` : '');
+
+    const row = `<tr data-type="${r.type}">
       <td>${r.title}</td>
-      <td>${r.type}</td>
-      <td>${r.description}</td>
+      <td>${typeCell}</td>
+      <td>${descCell}</td>
       <td>${accessCell}</td>
       <td>${r.license}</td>
       <td>${contactCell}</td>
@@ -80,15 +276,61 @@ $(document).ready(function() {
     $tbody.append(row);
   });
 
-  let table = $('#resource-table').DataTable({
-    paging:   false,
-    info:     false,
+  // ── Initialise DataTables ──────────────────────────────
+  let activeTypeFilter = 'all';
+
+  const table = $('#resource-table').DataTable({
+    paging:    false,
+    info:      false,
     searching: true,
-    order:    []
+    order:     [],
+    language: {
+      search:            '',
+      searchPlaceholder: '🔍  Search resources…'
+    }
   });
 
-  $('#filter-all').on('click',  () => table.column(1).search('').draw());
-  $('#filter-data').on('click', () => table.column(1).search('data', false, true).draw());
-  $('#filter-model').on('click',() => table.column(1).search('model', false, true).draw());
+  // ── Custom type filter – fixes "both" appearing in Data & Model ──
+  $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+    if (activeTypeFilter === 'all') return true;
+    const type = $(table.row(dataIndex).node()).data('type') || '';
+    if (activeTypeFilter === 'data')  return type === 'data'  || type === 'both';
+    if (activeTypeFilter === 'model') return type === 'model' || type === 'both';
+    return true;
+  });
+
+  // ── Resource count ─────────────────────────────────────
+  function updateCount () {
+    const shown = table.rows({ search: 'applied' }).count();
+    const total = RESOURCES.length;
+    $('#resource-count').text(
+      shown === total
+        ? `${total} resources`
+        : `Showing ${shown} of ${total} resources`
+    );
+  }
+  table.on('draw', updateCount);
+  updateCount();
+
+  // ── Filter buttons ─────────────────────────────────────
+  $('.filter-btn').on('click', function () {
+    $('.filter-btn').removeClass('active');
+    $(this).addClass('active');
+    activeTypeFilter = $(this).data('filter');
+    table.draw();
+  });
+
+  // ── Tag chips → full-text search ──────────────────────
+  $(document).on('click', '.tag', function () {
+    const tag = $(this).data('tag');
+    if ($(this).hasClass('active')) {
+      $(this).removeClass('active');
+      table.search('').draw();
+    } else {
+      $('.tag').removeClass('active');
+      $(this).addClass('active');
+      table.search(tag).draw();
+    }
+  });
 });
 </script>
