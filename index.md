@@ -3,9 +3,11 @@ layout: default
 title: Research Data & Models
 ---
 
-# Energy Use, Retrofit & Net Zero Catalogue
+# 🗂 Energy Use, Retrofit & Net Zero Catalogue
 
-Welcome to the Energy Use, Retrofit & Net Zero Research Theme's catalogue of datasets and computational models. We are part of the Institute for Environmental Design and Engineering in the Bartlett School of Environment, Energy and Resources at UCL. Our research investigates the energy consumption and carbon intensity of individual buildings and entire building stocks to inform retrofit strategies and accelerate the journey to net zero.
+Welcome to the **[Energy Use, Retrofit & Net Zero Research Theme](https://www.ucl.ac.uk/bartlett/environment-energy-resources/environmental-design/research-ucl-institute-environmental-design-and-engineering/energy-use-retrofit-and-net-zero)**'s catalogue of datasets and computational models.
+We are part of the **[UCL Institute for Environmental Design and Engineering (IEDE)](https://www.ucl.ac.uk/bartlett/environment-energy-resources/environmental-design)** within the **Bartlett School of Environment, Energy and Resources (BSEER)** at UCL.
+Our research investigates the energy consumption and carbon intensity of individual buildings and entire building stocks to inform retrofit strategies and accelerate the journey to net zero.
 
 <style>
 /* ── Filter bar ─────────────────────────────────────────── */
@@ -58,6 +60,7 @@ Welcome to the Energy Use, Retrofit & Net Zero Research Theme's catalogue of dat
 .badge-data  { background: #dbeafe; color: #1d4ed8; }
 .badge-model { background: #dcfce7; color: #15803d; }
 .badge-both  { background: #f3e8ff; color: #7e22ce; }
+.badge-other { background: #fff7ed; color: #c2410c; }
 
 /* ── Tags ───────────────────────────────────────────────── */
 .tags { margin-top: 7px; }
@@ -211,6 +214,7 @@ Welcome to the Energy Use, Retrofit & Net Zero Research Theme's catalogue of dat
   <button class="filter-btn active" data-filter="all">All</button>
   <button class="filter-btn" data-filter="data">Data</button>
   <button class="filter-btn" data-filter="model">Model</button>
+  <button class="filter-btn" data-filter="other">Other</button>
 </div>
 
 <p id="resource-count"></p>
@@ -233,7 +237,7 @@ Welcome to the Energy Use, Retrofit & Net Zero Research Theme's catalogue of dat
 
 <div class="contribute-box">
   <strong>Add a resource</strong> — fill out our <a href="https://forms.office.com/e/3qTjfDh5wp">short submission form</a> or open an issue on this repo.<br>
-  <strong>Questions or access requests</strong> — email <a href="mailto:ucbvauy@ucl.ac.uk">ucbvauy@ucl.ac.uk</a>.
+  <strong>Questions or access requests</strong> — email <a href="mailto:ucbvauy@ucl.ac.uk">Chun Sang Au Yong</a>.
 </div>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
@@ -245,9 +249,14 @@ $(document).ready(function () {
   const $tbody = $('#resource-table tbody');
 
   RESOURCES.forEach(r => {
-    // Type badge
-    const badgeClass = 'badge badge-' + (r.type === 'both' ? 'both' : r.type);
-    const typeCell = `<span class="${badgeClass}">${r.type}</span>`;
+    // Type badge — handle "data, model" (both) and other types like "simulation"
+    const t = r.type.toLowerCase().replace(/\s/g, '');
+    let badgeClass, badgeLabel;
+    if (t === 'data')                          { badgeClass = 'badge-data';  badgeLabel = 'Data'; }
+    else if (t === 'model')                    { badgeClass = 'badge-model'; badgeLabel = 'Model'; }
+    else if (t.includes('data') && t.includes('model')) { badgeClass = 'badge-both';  badgeLabel = 'Data + Model'; }
+    else                                       { badgeClass = 'badge-other'; badgeLabel = r.type; }
+    const typeCell = `<span class="badge ${badgeClass}">${badgeLabel}</span>`;
 
     // Access link
     const accessCell = r.link.startsWith('mailto:')
@@ -290,12 +299,18 @@ $(document).ready(function () {
     }
   });
 
-  // ── Custom type filter – fixes "both" appearing in Data & Model ──
+  // ── Custom type filter ─────────────────────────────────────────
+  // Handles "data, model", "simulation", and any future types.
+  // "data" and "model" filters include items that contain both.
+  // "other" catches anything that is neither data nor model.
   $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
     if (activeTypeFilter === 'all') return true;
-    const type = $(table.row(dataIndex).node()).data('type') || '';
-    if (activeTypeFilter === 'data')  return type === 'data'  || type === 'both';
-    if (activeTypeFilter === 'model') return type === 'model' || type === 'both';
+    const raw = ($(table.row(dataIndex).node()).data('type') || '').toLowerCase().replace(/\s/g, '');
+    const hasData  = raw.includes('data');
+    const hasModel = raw.includes('model');
+    if (activeTypeFilter === 'data')  return hasData;
+    if (activeTypeFilter === 'model') return hasModel;
+    if (activeTypeFilter === 'other') return !hasData && !hasModel;
     return true;
   });
 
