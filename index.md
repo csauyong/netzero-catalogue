@@ -194,6 +194,43 @@ Our research investigates the energy consumption and carbon intensity of individ
   box-shadow: 0 0 0 3px rgba(21,120,120,0.12);
 }
 
+/* ── Impact stats ───────────────────────────────────────── */
+.impact-stats {
+  display: flex;
+  gap: 12px;
+  margin: 1.5rem 0 1rem;
+  flex-wrap: wrap;
+}
+
+.impact-stat {
+  flex: 1;
+  min-width: 110px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  text-align: center;
+}
+
+.impact-stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #157878;
+  line-height: 1.1;
+  display: block;
+  letter-spacing: -0.02em;
+}
+
+.impact-stat-label {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 4px;
+  display: block;
+}
+
 /* ── Contribute box ─────────────────────────────────────── */
 .contribute-box {
   background: #f0fafa;
@@ -209,6 +246,21 @@ Our research investigates the energy consumption and carbon intensity of individ
 <script>
   const RESOURCES = {{ site.data.resources | jsonify }};
 </script>
+
+<div class="impact-stats">
+  <div class="impact-stat">
+    <span class="impact-stat-value" id="stat-resources">–</span>
+    <span class="impact-stat-label">Resources</span>
+  </div>
+  <div class="impact-stat">
+    <span class="impact-stat-value" id="stat-visitors">–</span>
+    <span class="impact-stat-label">Visitors</span>
+  </div>
+  <div class="impact-stat">
+    <span class="impact-stat-value" id="stat-downloads">–</span>
+    <span class="impact-stat-label">Downloads</span>
+  </div>
+</div>
 
 <div class="filter-bar">
   <button class="filter-btn active" data-filter="all">All</button>
@@ -326,6 +378,24 @@ $(document).ready(function () {
   }
   table.on('draw', updateCount);
   updateCount();
+
+  // ── Impact stats ───────────────────────────────────────
+  // Resources count (static)
+  $('#stat-resources').text(RESOURCES.length);
+
+  // Visitor count — increment on page load
+  fetch('https://api.counterapi.dev/v1/netzero-catalogue/visits/up')
+    .then(r => r.json())
+    .then(d => { $('#stat-visitors').text(d.count.toLocaleString()); })
+    .catch(() => { /* keep – if unavailable */ });
+
+  // Download count — increment on each download click
+  $(document).on('click', '.access-download', function () {
+    fetch('https://api.counterapi.dev/v1/netzero-catalogue/downloads/up')
+      .then(r => r.json())
+      .then(d => { $('#stat-downloads').text(d.count.toLocaleString()); })
+      .catch(() => {});
+  });
 
   // ── Filter buttons ─────────────────────────────────────
   $('.filter-btn').on('click', function () {
