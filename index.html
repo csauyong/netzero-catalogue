@@ -1,0 +1,135 @@
+---
+layout: default
+title: Research Data & Models
+---
+
+<section class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow reveal" style="--d:0">
+        <span class="pulse" aria-hidden="true"></span>
+        UCL IEDE · Energy Use, Retrofit &amp; Net Zero
+      </p>
+      <h1 class="reveal" style="--d:1">
+        Open data &amp; models for a <em class="hl">net zero</em> building stock.
+      </h1>
+      <p class="lede reveal" style="--d:2">
+        The catalogue of datasets and computational models from the
+        <a href="https://www.ucl.ac.uk/bartlett/environment-energy-resources/environmental-design/research-ucl-institute-environmental-design-and-engineering/energy-use-retrofit-and-net-zero" target="_blank" rel="noopener">Energy Use, Retrofit &amp; Net Zero Research Theme</a>
+        at the <a href="https://www.ucl.ac.uk/bartlett/environment-energy-resources/environmental-design" target="_blank" rel="noopener">UCL Institute for Environmental Design and Engineering</a>.
+        We study the energy use and carbon intensity of single buildings and whole building stocks to guide retrofit and speed up the move to net zero.
+      </p>
+      <div class="hero-actions reveal" style="--d:3">
+        <a class="btn btn-volt" href="#catalogue">Browse the catalogue <span aria-hidden="true">↓</span></a>
+        <a class="btn btn-ghost" href="#contribute">Add a resource</a>
+      </div>
+      <dl class="stats reveal" style="--d:4">
+        <div class="stat">
+          <dt>Resources</dt>
+          <dd id="stat-resources">–</dd>
+        </div>
+        <div class="stat">
+          <dt>Visitors</dt>
+          <dd id="stat-visitors">–</dd>
+        </div>
+        <div class="stat">
+          <dt>Downloads</dt>
+          <dd id="stat-downloads">–</dd>
+        </div>
+      </dl>
+    </div>
+
+    <figure class="skyline reveal" style="--d:2" aria-label="Illustration: buildings retrofitting, their windows switching from glowing orange to green as emissions fall to zero">
+      <svg viewBox="0 0 520 420" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="g-leaf" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0" stop-color="#c8f26a"/>
+            <stop offset="1" stop-color="#7fd98a"/>
+          </linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <g class="bldg">
+          <path class="draw" pathLength="1" d="M70 380V92L182 48V380Z"/>
+          <path class="draw" pathLength="1" d="M196 380V138H300V380Z" style="--dd:.15s"/>
+        </g>
+        <g id="windows" filter="url(#glow)"></g>
+        <g class="house">
+          <path class="draw" pathLength="1" d="M112 380V306L182 250L252 306V380Z" style="--dd:.3s"/>
+          <path class="door" d="M170 380V342a12 12 0 0 1 24 0V380Z"/>
+        </g>
+        <g id="house-windows" filter="url(#glow)"></g>
+        <g class="leaf">
+          <path class="leaf-body" d="M312 380C306 262 378 176 488 140C482 262 418 342 312 380Z"/>
+          <path class="leaf-vein draw" pathLength="1" d="M312 380C356 316 404 244 462 172" style="--dd:1.2s"/>
+        </g>
+        <path class="ground draw" pathLength="1" d="M30 380H500"/>
+      </svg>
+      <figcaption class="meter" aria-hidden="true">
+        <span class="meter-label">Operational emissions</span>
+        <span class="meter-value"><span id="meter-num">100</span><small>%</small></span>
+        <span class="meter-bar"><span id="meter-fill"></span></span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="marquee" aria-label="Browse by tag">
+  <div class="marquee-track" id="marquee"></div>
+</div>
+
+<section class="catalogue" id="catalogue">
+  <header class="section-head">
+    <p class="kicker">01 · Catalogue</p>
+    <h2>Datasets &amp; models</h2>
+  </header>
+
+  <div class="toolbar" id="toolbar">
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="sr-only">Search resources</span>
+      <input type="search" id="search" placeholder="Search titles, tags, licences…" autocomplete="off">
+      <kbd aria-hidden="true">/</kbd>
+    </label>
+    <div class="segments" role="radiogroup" aria-label="Filter by type" id="segments">
+      <span class="seg-indicator" aria-hidden="true"></span>
+      <button role="radio" aria-checked="true"  data-filter="all">All <span class="seg-n"></span></button>
+      <button role="radio" aria-checked="false" data-filter="data">Data <span class="seg-n"></span></button>
+      <button role="radio" aria-checked="false" data-filter="model">Model <span class="seg-n"></span></button>
+      <button role="radio" aria-checked="false" data-filter="other">Other <span class="seg-n"></span></button>
+    </div>
+  </div>
+
+  <div class="status">
+    <p id="resource-count" aria-live="polite"></p>
+    <button class="active-tag" id="active-tag" hidden></button>
+  </div>
+
+  <div class="cards" id="cards"></div>
+
+  <div class="empty" id="empty" hidden>
+    <p class="empty-zero">0</p>
+    <p>Nothing matches that search yet. <button class="link-btn" id="reset">Clear filters</button></p>
+  </div>
+</section>
+
+<section class="contribute" id="contribute">
+  <div class="contribute-inner">
+    <p class="kicker">02 · Contribute</p>
+    <h2>Got data or a model that should live here?</h2>
+    <p>Share your work with researchers, policymakers and practitioners working towards net zero.</p>
+    <div class="contribute-actions">
+      <a class="btn btn-volt" href="https://forms.office.com/e/3qTjfDh5wp" target="_blank" rel="noopener">Submit a resource <span aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href="https://github.com/csauyong/netzero-catalogue/issues" target="_blank" rel="noopener">Open an issue</a>
+    </div>
+    <p class="contribute-note">Questions or access requests? Email <a href="mailto:ucbvauy@ucl.ac.uk">Chun Sang Au Yong</a>.</p>
+  </div>
+</section>
+
+<script>
+  window.RESOURCES = {{ site.data.resources | jsonify }};
+</script>
+<script src="{{ '/assets/js/catalogue.js' | relative_url }}" defer></script>

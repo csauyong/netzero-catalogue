@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}IEDE Net Zero Catalogue</title>
+  <meta name="description" content="Datasets and computational models from the UCL IEDE Energy Use, Retrofit & Net Zero research theme.">
+  <meta name="theme-color" content="#0b1612">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  <link rel="icon" href="{{ '/assets/img/mark.svg' | relative_url }}" type="image/svg+xml">
+  {% include head.html %}
+</head>
+<body>
+  <a class="skip-link" href="#catalogue">Skip to catalogue</a>
+
+  <header class="nav" id="top">
+    <a class="nav-brand" href="{{ '/' | relative_url }}">
+      <img src="{{ '/assets/img/mark.svg' | relative_url }}" alt="" width="34" height="34">
+      <span><strong>IEDE</strong> Net Zero Catalogue</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#catalogue">Catalogue</a>
+      <a href="#contribute">Contribute</a>
+      <a href="https://www.ucl.ac.uk/bartlett/environment-energy-resources/environmental-design/research-ucl-institute-environmental-design-and-engineering/energy-use-retrofit-and-net-zero" target="_blank" rel="noopener">Research theme <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>
+        <strong>Energy Use, Retrofit &amp; Net Zero</strong> research theme<br>
+        UCL Institute for Environmental Design and Engineering · Bartlett School of Environment, Energy and Resources
+      </p>
+      <a class="footer-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>
