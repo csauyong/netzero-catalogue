@@ -62,6 +62,8 @@ body {
   overflow-x: hidden;
 }
 
+[hidden] { display: none !important; }
+
 a { color: inherit; }
 button { font: inherit; color: inherit; }
 ::selection { background: var(--volt); color: var(--ink); }
@@ -641,7 +643,6 @@ h1, h2, h3 {
   background: rgba(200, 242, 106, .15);
   font-size: .95rem;
 }
-.active-tag[hidden] { display: none; }
 @keyframes pop { from { transform: scale(.6); opacity: 0; } }
 
 /* Cards */
@@ -747,6 +748,28 @@ h1, h2, h3 {
   letter-spacing: -.02em;
   text-wrap: balance;
 }
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .25rem .9rem;
+  margin-top: -.35rem;
+  font-size: .82rem;
+  color: var(--text-faint);
+}
+.people { min-width: 0; }
+.people span { font-family: var(--f-mono); font-size: .74rem; }
+.paper {
+  font-weight: 600;
+  color: var(--text-soft);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .2s;
+}
+.paper span { display: inline-block; transition: transform .35s var(--ease-spring); }
+.paper:hover { color: var(--text); }
+.paper:hover span { transform: translate(2px, -2px); }
+
 .card p {
   margin: 0;
   color: var(--text-soft);
@@ -834,8 +857,6 @@ a.contact:hover { color: var(--text); text-decoration: underline; text-underline
   transition: opacity .7s var(--ease-out) var(--sd, 0s), transform .8s var(--ease-out) var(--sd, 0s), border-color .3s, box-shadow .4s;
 }
 .card.in:hover { transform: translateY(-4px); transition-delay: 0s; }
-
-.card[hidden] { display: none; }
 
 ::view-transition-group(*) { animation-duration: .45s; animation-timing-function: var(--ease-out); }
 

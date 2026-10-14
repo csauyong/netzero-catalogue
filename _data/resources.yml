@@ -1,69 +1,77 @@
 # _data/resources.yml
+#
+# Fields
+#   title        Resource name
+#   type         "data", "model", "data, model", or anything else, which is shown under "Other"
+#   description  One or two sentences
+#   link         Public URL, or "mailto:<address>" when access is by request
+#   link_label   Optional button text for public links (default "Download")
+#   license      Optional licence, e.g. "CC-BY-4.0"
+#   contact      Optional contact email
+#   people       Optional list of creators / developers
+#   paper        Optional URL of a related publication
+#   tags         List of lowercase, hyphenated keywords
 
-- title: "Urban Building Retrofit Cost Model"
-  type: "model"
-  description: "A regression model predicting retrofit costs for mid-rise residential buildings."
-  link: "https://github.com/YourOrg/retrofit-cost-model"
-  license: "Apache-2.0"
-  contact: "retrofit-team@lab.org"
-  tags:
-    - retrofit
-    - cost-estimation
-    - residential
-
-- title: "Thermal Performance Simulation Dataset"
+- title: "Care Home Overheating During Air-Conditioning Failure"
   type: "data"
-  description: "Hourly indoor/outdoor temperature logs from 50 net-zero prototype homes."
-  link: "https://doi.org/10.1234/zenodo.7654321"
-  license: "CC-BY 4.0"
-  contact: ""
+  description: "Simulation code and outputs from an EnergyPlus study of how London care homes overheat when air conditioning fails, testing outage schedules and passive measures. Outputs are in Parquet; the original building models (IDF files) are not shared."
+  link: "https://doi.org/10.5281/zenodo.19134321"
+  license: "CC-BY-4.0"
+  contact: "charles.simpson@ucl.ac.uk"
+  people:
+    - Charles Simpson
+    - Giorgos Petrou
+    - Eleni Oikonomou
+    - Clare Heaviside
+    - Michael Davies
   tags:
-    - net-zero
-    - thermal
-    - simulation
+    - overheating
+    - care-homes
+    - energyplus
+    - power-outage
+    - london
 
-- title: "Carbon Emissions Reduction Scenarios"
-  type: "data"
-  description: "Synthetic emissions data under three retrofit penetration pathways (2020–2050)."
-  # Restricted access: download via email
-  link: "mailto:policy-lab@lab.org"
-  license: "CC0"
-  contact: "policy-lab@lab.org"
-  tags:
-    - emissions
-    - scenario
-    - policy
-
-- title: "Net-Zero Energy Building Design Generator"
-  type: "data, model"
-  description: "Code and example datasets for automated NZEB floorplan and envelope design."
-  # Restricted access: download via email
-  link: "mailto:design-lab@university.edu"
-  license: "Proprietary"
-  contact: "design-lab@university.edu"
-  tags:
-    - nzeb
-    - generative-design
-    - envelope
-
-- title: "Retrofit Energy Performance Prediction Model"
+- title: "English Archetypes"
   type: "model"
-  description: "A gradient-boosting model forecasting post-retrofit energy savings."
-  link: "https://github.com/YourOrg/retrofit-energy-model"
-  license: "MIT"
-  contact: "energy-model@lab.org"
+  description: "A statistically derived set of representative dwelling archetypes for England, built mainly from the English Housing Survey 2010–11. Intended as a default library for stock models of energy use, thermal comfort and indoor air quality."
+  link: "mailto:e.oikonomou@ucl.ac.uk"
+  contact: "e.oikonomou@ucl.ac.uk"
+  people:
+    - Eleni Oikonomou
+    - Anna Mavrogianni
+    - Rokia Raslan
+    - Jonathon Taylor
+    - Michael Davies
   tags:
-    - retrofit
-    - energy
-    - machine-learning
+    - housing-stock
+    - archetypes
+    - england
 
-- title: "Building Materials Embodied Carbon Simulation"
-  type: "simulation"
-  description: "Embodied carbon factors for 120 common construction materials."
-  link: "https://doi.org/10.1234/zenodo.1122334"
-  license: "CC-BY-NC"
-  contact: ""
+- title: "DOMEUS-Energy"
+  type: "model"
+  description: "A housing stock energy use model that uses localised urban temperature data from the LUCID project to assess how the London heat island affects variations in domestic heat demand."
+  link: "mailto:a.mavrogianni@ucl.ac.uk"
+  contact: "a.mavrogianni@ucl.ac.uk"
+  people:
+    - Anna Mavrogianni
+  paper: "https://discovery.ucl.ac.uk/id/eprint/1352829/"
   tags:
-    - materials
-    - carbon
-    - lifecycle
+    - housing-stock
+    - urban-heat-island
+    - heat-demand
+    - london
+
+- title: "UCL-HAMT"
+  type: "model"
+  description: "The Combined Heat and Moisture Transfer model simulates the simultaneous movement and storage of heat and moisture in building surfaces, to and from both the internal and external environments. It is built into EnergyPlus."
+  link: "https://bigladdersoftware.com/epx/docs/26-1/engineering-reference/combined-heat-and-moisture-transfer-hamt.html"
+  link_label: "Documentation"
+  license: "BSD-3-Clause"
+  contact: "p.symonds@ucl.ac.uk"
+  people:
+    - Phillip Biddulph
+  tags:
+    - energyplus
+    - moisture
+    - hygrothermal
+    - building-fabric

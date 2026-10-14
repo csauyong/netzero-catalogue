@@ -27,17 +27,33 @@
   const BADGE = { data: 'Data', model: 'Model', both: 'Data + Model' };
 
   const ICON_DOWNLOAD = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>';
+  const ICON_LINK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
   const ICON_MAIL = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>';
 
   // ── Render cards ───────────────────────────────────────────────────────
   const items = RESOURCES.map((r, i) => {
     const kind = kindOf(r.type);
     const tags = r.tags || [];
+    const people = r.people || [];
     const isMail = String(r.link || '').startsWith('mailto:');
 
+    // Request-access emails get a pre-filled subject line. Only links without
+    // a custom label count towards the downloads stat.
+    const mailto = isMail && !r.link.includes('?')
+      ? `${r.link}?subject=${encodeURIComponent('Access request: ' + r.title)}`
+      : r.link;
     const access = isMail
-      ? `<a class="access access-contact" href="${esc(r.link)}">${ICON_MAIL}Request access</a>`
-      : `<a class="access access-download" href="${esc(r.link)}" target="_blank" rel="noopener">${ICON_DOWNLOAD}Download</a>`;
+      ? `<a class="access access-contact" href="${esc(mailto)}">${ICON_MAIL}Request access</a>`
+      : `<a class="access access-download" href="${esc(r.link)}" target="_blank" rel="noopener"${r.link_label ? '' : ' data-count'}>${r.link_label ? ICON_LINK : ICON_DOWNLOAD}${esc(r.link_label || 'Download')}</a>`;
+
+    const shown = people.slice(0, 3).map(esc).join(', ');
+    const more = people.length > 3 ? ` <span title="${esc(people.slice(3).join(', '))}">+${people.length - 3}</span>` : '';
+    const meta = people.length || r.paper
+      ? `<div class="meta">
+          ${people.length ? `<span class="people" title="${esc(people.join(', '))}">${shown}${more}</span>` : ''}
+          ${r.paper ? `<a class="paper" href="${esc(r.paper)}" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>` : ''}
+        </div>`
+      : '';
 
     const contact = r.contact
       ? `<a class="contact" href="mailto:${esc(r.contact)}">${esc(r.contact)}</a>`
@@ -53,11 +69,12 @@
         ${r.license ? `<span class="license" title="Licence">${esc(r.license)}</span>` : ''}
       </div>
       <h3>${esc(r.title)}</h3>
+      ${meta}
       <p>${esc(r.description)}</p>
       ${tags.length ? `<ul class="tags">${tags.map(t => `<li><button class="tag" data-tag="${esc(t)}">${esc(t)}</button></li>`).join('')}</ul>` : ''}
       <div class="card-foot">${contact}${access}</div>`;
 
-    const haystack = [r.title, r.description, r.type, r.license, r.contact, ...tags].join(' ').toLowerCase();
+    const haystack = [r.title, r.description, r.type, r.license, r.contact, ...people, ...tags].join(' ').toLowerCase();
     return { el, kind, tags, haystack };
   });
 
@@ -117,7 +134,10 @@
     model: items.filter(it => it.kind === 'model' || it.kind === 'both').length,
     other: items.filter(it => it.kind === 'other').length
   };
-  segButtons.forEach(b => { $('.seg-n', b).textContent = counts[b.dataset.filter]; });
+  segButtons.forEach(b => {
+    $('.seg-n', b).textContent = counts[b.dataset.filter];
+    b.hidden = counts[b.dataset.filter] === 0;
+  });
 
   function placeIndicator () {
     const active = segButtons.find(b => b.getAttribute('aria-checked') === 'true');
@@ -140,10 +160,12 @@
     b.tabIndex = i === 0 ? 0 : -1;
     b.addEventListener('click', () => setType(b));
     b.addEventListener('keydown', e => {
+      const visible = segButtons.filter(s => !s.hidden);
+      const pos = visible.indexOf(b);
       const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
       if (!step) return;
       e.preventDefault();
-      const next = segButtons[(i + step + segButtons.length) % segButtons.length];
+      const next = visible[(pos + step + visible.length) % visible.length];
       next.focus();
       setType(next);
     });
@@ -293,7 +315,7 @@
 
   // ...and increment it on each download click
   document.addEventListener('click', e => {
-    if (!e.target.closest('.access-download')) return;
+    if (!e.target.closest('.access-download[data-count]')) return;
     if (!$statDownloads.isConnected) return;
     counter('downloads/up')
       .then(n => {
